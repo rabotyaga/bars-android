@@ -1,0 +1,25 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    tools:context="ru.rabotyaga.baranov.MainActivity"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/resultsCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:layout_marginLeft="@dimen/root_margin"
+        android:layout_marginRight="@dimen/root_margin"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        />
+
+    <include layout="@layout/settings_layout" />
+
+    <include layout="@layout/list_layout" />
+
+</LinearLayout>

@@ -1,0 +1,36 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/optionsRL"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:visibility="visible"
+    android:focusableInTouchMode="true">
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rbSearchLikeText"
+        android:id="@+id/rbSearchLike"
+        android:layout_gravity="center_horizontal"
+        android:onClick="onRbSearchClick"
+        android:checked="true"/>
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rbSearchExactText"
+        android:id="@+id/rbSearchExact"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@id/rbSearchLike"
+        android:onClick="onRbSearchClick"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rbSearchExact"
+        android:layout_marginTop="20dp"
+        android:id="@+id/bClearSearchHistory"
+        android:text="@string/bClearSearchHistoryText"
+        android:onClick="onBClearSearchHistoryClick"/>
+
+</RelativeLayout>

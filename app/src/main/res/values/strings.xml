@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Словарь Баранова</string>
+    <string name="action_settings">Настройки</string>
+    <string name="search_title">Искать в словаре Баранова</string>
+    <string name="search_hint">Арабское или русское слово</string>
+    <string name="rbSearchLikeText">Искать любое вхождение</string>
+    <string name="rbSearchExactText">Искать только точное совпадение</string>
+    <string name="bClearSearchHistoryText">Удалить историю поиска</string>
+    <string name="clear_search_history_dialog_title">Удалить историю поиска?</string>
+    <string name="delete">Удалить</string>
+    <string name="cancel">Отмена</string>
+    <string name="enter_arabic_or_russian_word">Введите арабское или русское слово</string>
+    <string name="you_entered_only_one_character">Вы ввели только 1 символ</string>
+    <string name="the_search_will_be_made_in_exact_mode">Поиск будет произведен в режиме \"точное совпадение\"</string>
+    <string name="details_activity_title">Корень</string>
+    <string name="results">Результатов: %d</string>
+    <string name="alphabet">Алфавит</string>
+    <string name="about">О программе</string>
+    <string name="nr_title">№</string>
+    <string name="nv_title">Числовое значение</string>
+    <string name="writing">Написание</string>
+    <string name="in_the_beginning">В начале</string>
+    <string name="in_the_middle">В середине</string>
+    <string name="in_the_end">В конце</string>
+    <string name="copy_translation">Копировать перевод</string>
+    <string name="copy_whole_article">Копировать всю карточку</string>
+    <string name="translation_copied">Перевод скопирован в буфер обмена</string>
+    <string name="whole_article_copied">Карточка скопирована в буфер обмена</string>
+</resources>

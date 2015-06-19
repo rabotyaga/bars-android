@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="card_title_bkg">#B39DDB</color>
+    <color name="background_match_highlight">#C8E6C9</color>
+    <color name="selected_article">#B3E5FC</color>
+    <color name="card_background">#FAFAFA</color>
+    <color name="card_background_dark">#EEEEEE</color>
+    <color name="arabic_text">#00695C</color>
+    <color name="bkg_1">#E8F5E9</color>
+    <color name="bkg_2">#FFFDE7</color>
+    <color name="bkg_3">#FBE9E7</color>
+</resources>

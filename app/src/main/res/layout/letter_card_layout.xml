@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--suppress XmlUnusedNamespaceDeclaration -->
+<android.support.v7.widget.CardView
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/letter_card_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="5dp"
+    android:elevation="4dp"
+    card_view:cardBackgroundColor="@color/card_background"
+    tools:ignore="UnusedAttribute">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/txtLetter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="40sp"
+            android:textColor="@color/arabic_text"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"/>
+
+        <TextView
+            android:id="@+id/txtNrTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:text="@string/nr_title"
+            />
+
+        <TextView
+            android:id="@+id/txtNr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_toRightOf="@id/txtNrTitle"
+            android:layout_toEndOf="@id/txtNrTitle"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/nv_ll"
+            android:layout_below="@id/txtLetter"
+            android:layout_centerHorizontal="true">
+
+            <TextView
+                android:id="@+id/txtNvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:textSize="20sp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
+                android:text="@string/nv_title"
+                />
+
+            <TextView
+                android:id="@+id/txtNv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:textSize="20sp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
+                />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtWritingTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textSize="20sp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/nv_ll"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:text="@string/writing"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/in_the_beginning_ll"
+            android:layout_below="@id/txtWritingTitle"
+            android:layout_centerHorizontal="true"
+            android:background="@color/bkg_1">
+
+            <TextView
+                android:id="@+id/txtInTheBeginningTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:textSize="20sp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
+                android:text="@string/in_the_beginning"
+                />
+
+            <TextView
+                android:id="@+id/txtInTheBeginning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:textSize="20sp"
+                android:textColor="@color/arabic_text"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/in_the_middle_ll"
+            android:layout_below="@id/in_the_beginning_ll"
+            android:layout_centerHorizontal="true"
+            android:background="@color/bkg_2">
+
+            <TextView
+                android:id="@+id/txtInTheMiddleTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:textSize="20sp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
+                android:text="@string/in_the_middle"
+                />
+
+            <TextView
+                android:id="@+id/txtInTheMiddle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:textSize="20sp"
+                android:textColor="@color/arabic_text"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/in_the_end_ll"
+            android:layout_below="@id/in_the_middle_ll"
+            android:layout_centerHorizontal="true"
+            android:background="@color/bkg_3">
+
+            <TextView
+                android:id="@+id/txtInTheEndTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:textSize="20sp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
+                android:text="@string/in_the_end"
+                />
+
+            <TextView
+                android:id="@+id/txtInTheEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:textSize="20sp"
+                android:textColor="@color/arabic_text"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtNotes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/in_the_end_ll"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            />
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
