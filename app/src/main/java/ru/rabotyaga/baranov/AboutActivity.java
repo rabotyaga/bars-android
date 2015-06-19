@@ -16,10 +16,10 @@ public class AboutActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             AboutFragment af = new AboutFragment();
             getFragmentManager().beginTransaction().add(android.R.id.content, af, AboutFragment.TAG).commit();
-            ActionBar ab = getSupportActionBar();
-            if (ab != null) {
-                ab.setTitle(getResources().getString(R.string.about));
-            }
+        }
+        ActionBar ab = getSupportActionBar();
+        if (ab != null) {
+            ab.setTitle(getResources().getString(R.string.about));
         }
     }
 

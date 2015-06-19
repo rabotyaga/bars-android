@@ -16,10 +16,10 @@ public class AlphabetActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             AlphabetFragment af = new AlphabetFragment();
             getFragmentManager().beginTransaction().add(android.R.id.content, af, AlphabetFragment.TAG).commit();
-            ActionBar ab = getSupportActionBar();
-            if (ab != null) {
-                ab.setTitle(getResources().getString(R.string.alphabet));
-            }
+        }
+        ActionBar ab = getSupportActionBar();
+        if (ab != null) {
+            ab.setTitle(getResources().getString(R.string.alphabet));
         }
     }
 
