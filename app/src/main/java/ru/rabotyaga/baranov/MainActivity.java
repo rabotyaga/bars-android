@@ -458,6 +458,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 searchView.setQuery(loader_query, false);
             }
 
+            listHeader.setText(firstResult.root);
 
         } else {
             optionsPane.setVisibility(View.VISIBLE);
