@@ -1,5 +1,6 @@
 package ru.rabotyaga.baranov;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class AboutFragment extends Fragment {
@@ -37,7 +39,13 @@ public class AboutFragment extends Fragment {
         bLeaveComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + MainActivity.PACKAGE_NAME)));
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + MainActivity.PACKAGE_NAME));
+                if(!safeStartActivity(intent)) {
+                    intent.setData(Uri.parse("https://play.google.com/store/apps/details?" + MainActivity.PACKAGE_NAME));
+                    if (!safeStartActivity(intent)) {
+                        Toast.makeText(getActivity(), getResources().getString(R.string.unable_to_open_market) , Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
 
@@ -45,12 +53,23 @@ public class AboutFragment extends Fragment {
         bGoToSite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.site_url))));
+                if (!safeStartActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.site_url))))) {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.unable_to_open_site) , Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
 
         return v;
+    }
+
+    private boolean safeStartActivity(Intent intent) {
+        try {
+            startActivity(intent);
+            return true;
+        } catch (ActivityNotFoundException e) {
+            return false;
+        }
     }
 
 

@@ -36,4 +36,6 @@
     <string name="site_url">https://desolate-island-2917.herokuapp.com/about</string>
     <string name="leave_a_comment">Оставить отзыв</string>
     <string name="go_to_site">Перейти на сайт</string>
+    <string name="unable_to_open_market">Не удается открыть Google Play. Установите Google Play или бразуер.</string>
+    <string name="unable_to_open_site">Не удается открыть ссылку. Установите бразуер</string>
 </resources>
