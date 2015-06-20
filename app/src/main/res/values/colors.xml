@@ -9,4 +9,7 @@
     <color name="bkg_1">#E8F5E9</color>
     <color name="bkg_2">#FFFDE7</color>
     <color name="bkg_3">#FBE9E7</color>
+    <color name="flat_pressed">#66999999</color>
+    <color name="flat_disabled_text">@color/primary_text_disabled_material_light</color>
+    <color name="flat_normal_text">@color/link_text_material_light</color>
 </resources>

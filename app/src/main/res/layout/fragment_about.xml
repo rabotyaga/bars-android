@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     tools:context="ru.rabotyaga.baranov.AboutFragment"
     android:orientation="vertical"
-    android:gravity="center_horizontal">
+    android:gravity="center">
 
 
     <ImageView
@@ -28,10 +28,10 @@
         android:layout_height="wrap_content"
         android:text="@string/copyright"/>
 
-    <TextView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/link_text_material_light"
+        style="@style/AppCompat.Button.Flat"
         android:id="@+id/bLeaveComment"
         android:text="@string/leave_a_comment" />
 
@@ -39,7 +39,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_marginTop="20dp"
         android:text="@string/description"/>
 
     <TextView
@@ -49,13 +48,12 @@
         android:layout_marginTop="10dp"
         android:text="@string/description2"/>
 
-    <TextView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/link_text_material_light"
+        style="@style/AppCompat.Button.Flat"
         android:id="@+id/bGoToSite"
         android:text="@string/go_to_site" />
-
 
 
 

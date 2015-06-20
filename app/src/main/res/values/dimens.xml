@@ -1,3 +1,8 @@
 <resources>
     <dimen name="root_margin">8dp</dimen>
+    <dimen name="btn_flat_corner_radius">2dp</dimen>
+    <dimen name="btn_flat_min_width">88dp</dimen>
+    <dimen name="btn_flat_min_height">36dp</dimen>
+    <dimen name="btn_flat_padding">8dp</dimen>
+    <dimen name="btn_flat_margin">4dp</dimen>
 </resources>
