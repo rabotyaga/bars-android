@@ -48,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private final static String ARG_DETAILS_NR = "details_nr";
     private final static String ARG_DETAILS_ROOT = "details_root";
 
+    public static String PACKAGE_NAME;
+
     private MyDatabase db;
 
     private RecyclerView listView;
@@ -88,6 +90,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        PACKAGE_NAME = getApplicationContext().getPackageName();
 
         listView = (RecyclerView) findViewById(R.id.cardlist);
         listHeader = (TextView) findViewById(R.id.textview);

@@ -26,4 +26,14 @@
     <string name="copy_whole_article">Копировать всю карточку</string>
     <string name="translation_copied">Перевод скопирован в буфер обмена</string>
     <string name="whole_article_copied">Карточка скопирована в буфер обмена</string>
+    <string name="app_name_long">Арабско - русский словарь Баранова</string>
+    <string name="version">Версия %s</string>
+    <string name="copyright">© 2015 Иван Работяга</string>
+    <string name="description">В программе используется цифровая копия словаря Х. К. Баранова,
+        созданная Маратом Сайфутдиновым, исправленная и дополненная</string>
+    <string name="description2">Программа является частью проекта по созданию современного,
+        открытого и дополняемого словаря</string>
+    <string name="site_url">https://desolate-island-2917.herokuapp.com/about</string>
+    <string name="leave_a_comment">Оставить отзыв</string>
+    <string name="go_to_site">Перейти на сайт</string>
 </resources>
