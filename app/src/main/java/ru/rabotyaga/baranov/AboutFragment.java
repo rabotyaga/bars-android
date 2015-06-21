@@ -41,7 +41,7 @@ public class AboutFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + MainActivity.PACKAGE_NAME));
                 if(!safeStartActivity(intent)) {
-                    intent.setData(Uri.parse("https://play.google.com/store/apps/details?" + MainActivity.PACKAGE_NAME));
+                    intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=" + MainActivity.PACKAGE_NAME));
                     if (!safeStartActivity(intent)) {
                         Toast.makeText(getActivity(), getResources().getString(R.string.unable_to_open_market) , Toast.LENGTH_SHORT).show();
                     }
