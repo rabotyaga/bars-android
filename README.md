@@ -10,7 +10,7 @@
 Существует несколько версий словаря:
 
 * [Веб-версия](https://desolate-island-2917.herokuapp.com)
-* [Версия для Android](https://play.google.com/store/apps/details?ru.rabotyaga.baranov)
+* [Версия для Android](https://play.google.com/store/apps/details?id=ru.rabotyaga.baranov)
 * Версия для iPhone / iPad (выйдет в ближайшее время)
 * База данных словаря в формате Apple Dictionary (выйдет в ближайшее время)
 
