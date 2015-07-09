@@ -237,7 +237,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             }
             Log.d(TAG, "search: " + mQuery);
 
-            if (!mQuery.matches("[\\p{InARABIC}\\p{InCyrillic}]+")) {
+            /*if (!mQuery.matches("[\\p{InARABIC}\\p{InCyrillic}]+")) {
                 Resources resources = getResources();
                 AlertDialog.Builder alert = new AlertDialog.Builder(this);
                 alert.setTitle(resources.getString(R.string.enter_arabic_or_russian_word));
@@ -254,7 +254,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 alertDialog = alert.show();
                 intent.removeExtra(SearchManager.QUERY);
                 return;
-            }
+            }*/
 
             if (mQuery.length() < 2 && rbSearchLike.isChecked()) {
                 Resources resources = getResources();
