@@ -93,6 +93,8 @@ class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleViewHold
             articleViewHolder.vRoot.setVisibility(View.VISIBLE);
         }
 
+        articleViewHolder.vTranscription.setText(a.transcription);
+
         if (a.opts.isEmpty()) {
             articleViewHolder.vOpts.setVisibility(View.GONE);
         } else {
@@ -106,8 +108,8 @@ class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleViewHold
             articleViewHolder.vForm.setVisibility(View.VISIBLE);
         }
 
-        if (a.homonymNum != null) {
-            articleViewHolder.vHomonymNum.setText(a.homonymNum.toString());
+        if (a.homonym_nr != null) {
+            articleViewHolder.vHomonymNum.setText(a.homonym_nr.toString());
         } else {
             articleViewHolder.vHomonymNum.setText("");
         }
@@ -148,6 +150,7 @@ class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleViewHold
         final TextView vForm;
         final TextView vHomonymNum;
         final TextView vVocalization;
+        final TextView vTranscription;
         final CardView cardView;
         Integer nr = null;
 
@@ -161,6 +164,8 @@ class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleViewHold
             vForm = (TextView) v.findViewById(R.id.txtForm);
             vHomonymNum = (TextView) v.findViewById(R.id.txtHomonymNum);
             vVocalization = (TextView) v.findViewById(R.id.txtVocalization);
+            vTranscription = (TextView) v.findViewById(R.id.txtTranscription);
+
             cardView = (CardView) v;
         }
 

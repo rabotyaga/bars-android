@@ -25,16 +25,19 @@ final class MyDatabase extends SQLiteOpenHelper {
     private static final String TAG = MyDatabase.class.getSimpleName();
 
     private static final String DATABASE_NAME = "articles.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     private static final String ARTICLE_TABLE = "articles";
 
-    private static final String COLUMN_AR_INF = "ar_inf";
-    private static final String COLUMN_TRANSLATION = "translation";
     private static final String COLUMN_NR = "nr";
+    private static final String COLUMN_AR_INF = "ar_inf";
     private static final String COLUMN_AR_INF_WO_VOWELS = "ar_inf_wo_vowels";
-    private static final String COLUMN_FORM = "form";
+    private static final String COLUMN_TRANSCRIPTION = "transcription";
+    private static final String COLUMN_TRANSLATION = "translation";
     private static final String COLUMN_ROOT = "root";
+    private static final String COLUMN_FORM = "form";
+    private static final String COLUMN_VOCALIZATION = "vocalization";
+    private static final String COLUMN_HOMONYM_NR = "homonym_nr";
     private static final String COLUMN_OPT = "opt";
     private static final String COLUMN_MN1 = "mn1";
     private static final String COLUMN_AR1 = "ar1";
@@ -44,12 +47,15 @@ final class MyDatabase extends SQLiteOpenHelper {
     private static final String COLUMN_AR3 = "ar3";
 
     private static final String[] ALL_COLUMNS = {
-            COLUMN_AR_INF,
-            COLUMN_TRANSLATION,
             COLUMN_NR,
+            COLUMN_AR_INF,
             COLUMN_AR_INF_WO_VOWELS,
-            COLUMN_FORM,
+            COLUMN_TRANSCRIPTION,
+            COLUMN_TRANSLATION,
             COLUMN_ROOT,
+            COLUMN_FORM,
+            COLUMN_VOCALIZATION,
+            COLUMN_HOMONYM_NR,
             COLUMN_OPT,
             COLUMN_MN1,
             COLUMN_AR1,
@@ -266,43 +272,25 @@ final class MyDatabase extends SQLiteOpenHelper {
 
         BidiFormatter bidi = BidiFormatter.getInstance();
 
-        a.ar_inf = c.getString(c.getColumnIndex(COLUMN_AR_INF));
-
-        a.ar_inf_wo_vowels = c.getString(c.getColumnIndex(COLUMN_AR_INF_WO_VOWELS));
-        a.translation = unescape(c.getString(c.getColumnIndex(COLUMN_TRANSLATION)));
         a.nr = c.getInt(c.getColumnIndex(COLUMN_NR));
+        a.ar_inf = c.getString(c.getColumnIndex(COLUMN_AR_INF));
+        a.ar_inf_wo_vowels = c.getString(c.getColumnIndex(COLUMN_AR_INF_WO_VOWELS));
+        a.transcription = "[" + c.getString(c.getColumnIndex(COLUMN_TRANSCRIPTION)) + "]";
+        a.translation = unescape(c.getString(c.getColumnIndex(COLUMN_TRANSLATION)));
         a.root = c.getString(c.getColumnIndex(COLUMN_ROOT));
         a.form = c.getString(c.getColumnIndex(COLUMN_FORM));
+        a.vocalization = c.getString(c.getColumnIndex(COLUMN_VOCALIZATION));
+        a.homonym_nr = c.getInt(c.getColumnIndex(COLUMN_HOMONYM_NR));
 
         String opt1 = c.getString(c.getColumnIndex(COLUMN_OPT));
-
-        //searching for vocalization in opt
-        if (opt1.matches("^\\(([ауи/, \\(\\)]+)(или)*([ауи/, \\(\\)]*)\\)$")) {
-            a.vocalization = opt1;
-            opt1 = "";
-        } else {
-            a.vocalization = "";
-        }
-
-        //searching for homonym # in opt
-        if (opt1.matches("^\\d+$")) {
-            a.homonymNum = Integer.decode(opt1);
-            opt1 = "";
-        }
-
         String mn1 = c.getString(c.getColumnIndex(COLUMN_MN1));
-        //searching for homonym # in mn1
-        if (mn1.matches("^\\d+$")) {
-            a.homonymNum = Integer.decode(mn1);
-            mn1 = "";
-        }
 
         SpannableStringBuilder opts = new SpannableStringBuilder();
         int start;
 
         if (!opt1.isEmpty()) {
             opts.append(opt1);
-            opts.append("   ");
+            opts.append(" ");
         }
 
         opts.append(mn1);

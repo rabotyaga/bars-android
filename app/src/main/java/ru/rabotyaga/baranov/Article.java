@@ -15,12 +15,13 @@ class Article {
     Integer nr;
     String ar_inf;
     String ar_inf_wo_vowels;
-    String root;
+    String transcription;
     String translation;
+    String root;
     String form;
-    String opts;
-    Integer homonymNum;
     String vocalization;
+    Integer homonym_nr;
+    String opts;
 
     Spannable highlighted_ar_inf;
     Spannable highlighted_translation;
@@ -97,8 +98,8 @@ class Article {
 
         str.append(bidi.unicodeWrap(ar_inf)).append(" ");
 
-        if (homonymNum != null) {
-            str.append(homonymNum.toString()).append(" ");
+        if (homonym_nr != null) {
+            str.append(homonym_nr.toString()).append(" ");
         }
 
         if (!vocalization.isEmpty()) {
@@ -124,8 +125,8 @@ class Article {
 
         str.append(bidi.unicodeWrap(ar_inf)).append(" ");
 
-        if (homonymNum != null) {
-            str.append(homonymNum.toString()).append(" ");
+        if (homonym_nr != null) {
+            str.append(homonym_nr.toString()).append(" ");
         }
 
         if (!vocalization.isEmpty()) {
