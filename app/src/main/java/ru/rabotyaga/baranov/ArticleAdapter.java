@@ -116,6 +116,8 @@ class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleViewHold
 
         if (a.vocalization != null) {
             articleViewHolder.vVocalization.setText(a.vocalization);
+        } else {
+            articleViewHolder.vVocalization.setText("");
         }
 
         articleViewHolder.setNr(a.nr);
