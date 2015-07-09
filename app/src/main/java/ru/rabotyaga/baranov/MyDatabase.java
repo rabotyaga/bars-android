@@ -275,7 +275,7 @@ final class MyDatabase extends SQLiteOpenHelper {
         a.nr = c.getInt(c.getColumnIndex(COLUMN_NR));
         a.ar_inf = c.getString(c.getColumnIndex(COLUMN_AR_INF));
         a.ar_inf_wo_vowels = c.getString(c.getColumnIndex(COLUMN_AR_INF_WO_VOWELS));
-        a.transcription = "[" + c.getString(c.getColumnIndex(COLUMN_TRANSCRIPTION)) + "]";
+        a.transcription = c.getString(c.getColumnIndex(COLUMN_TRANSCRIPTION));
         a.translation = unescape(c.getString(c.getColumnIndex(COLUMN_TRANSLATION)));
         a.root = c.getString(c.getColumnIndex(COLUMN_ROOT));
         a.form = c.getString(c.getColumnIndex(COLUMN_FORM));
