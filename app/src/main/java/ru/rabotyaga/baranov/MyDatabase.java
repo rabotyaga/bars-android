@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -130,6 +131,7 @@ final class MyDatabase extends SQLiteOpenHelper {
     public List<Article> getArticlesByQuery(String query, boolean exactSearch) {
 
         List<Article> list = new ArrayList<>();
+        List<Root> rootList = new ArrayList<>();
 
         boolean ru_search = false;
         String selection;
@@ -159,22 +161,57 @@ final class MyDatabase extends SQLiteOpenHelper {
         int matchHighlightColor = mContext.getResources().getColor(R.color.background_match_highlight);
         int arabicTextColor = mContext.getResources().getColor(R.color.arabic_text);
 
+        Root current_root = new Root();
+        current_root.articles = new ArrayList<>();
+        Integer current_article_match_score;
+
         while (c.moveToNext()) {
             Article a = fillInArticleFromCursor(c, arabicTextColor);
 
             if (ru_search) {
                 if (exactSearch) {
-                    a.setHighlightedTranslation(matchHighlightColor, " " + query + " ");
+                    current_article_match_score = a.setHighlightedTranslation(matchHighlightColor, " " + query + " ");
                 } else {
-                    a.setHighlightedTranslation(matchHighlightColor, query);
+                    current_article_match_score = a.setHighlightedTranslation(matchHighlightColor, query);
                 }
+                current_article_match_score = Math.round(current_article_match_score / (float) a.translation.length() * 100);
             } else {
-                a.setHighlightedArInf(matchHighlightColor, query);
+                current_article_match_score = a.setHighlightedArInf(matchHighlightColor, query);
+                current_article_match_score = Math.round(current_article_match_score / (float) a.ar_inf.length() * 100);
             }
 
-            list.add(a);
+            if (current_root.root != null && current_root.root.equals(a.root)) {
+                current_root.articles.add(a);
+                if (current_root.matchScore < current_article_match_score) {
+                    current_root.matchScore = current_article_match_score;
+                }
+            } else {
+                if (c.getPosition() > 0) {
+                    rootList.add(current_root);
+                    current_root = new Root();
+                    current_root.articles = new ArrayList<>();
+                }
+                current_root.root = a.root;
+                current_root.articles.add(a);
+                current_root.matchScore = current_article_match_score;
+            }
+            //a.translation = current_article_match_score.toString() + " nr " + a.nr.toString();
+            //a.highlighted_translation = Spannable.Factory.getInstance().newSpannable(a.translation);
+          //  list.add(a);
         }
         c.close();
+
+        if (!current_root.articles.isEmpty()) {
+            rootList.add(current_root);
+        }
+
+        Collections.sort(rootList, new RootMatchScoreComparator());
+
+        for (Root root : rootList) {
+            for (Article article : root.articles) {
+                list.add(article);
+            }
+        }
 
         return list;
     }
@@ -280,8 +317,13 @@ final class MyDatabase extends SQLiteOpenHelper {
         a.root = c.getString(c.getColumnIndex(COLUMN_ROOT));
         a.form = c.getString(c.getColumnIndex(COLUMN_FORM));
         a.vocalization = c.getString(c.getColumnIndex(COLUMN_VOCALIZATION));
+        if (a.vocalization.equals("\\N")) {
+            a.vocalization = null;
+        }
         a.homonym_nr = c.getInt(c.getColumnIndex(COLUMN_HOMONYM_NR));
-
+        if (a.homonym_nr == 0) {
+            a.homonym_nr = null;
+        }
         String opt1 = c.getString(c.getColumnIndex(COLUMN_OPT));
         String mn1 = c.getString(c.getColumnIndex(COLUMN_MN1));
 

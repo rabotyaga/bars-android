@@ -8,6 +8,8 @@ import android.text.Spanned;
 import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -49,8 +51,9 @@ class Article {
         }
     }
 
-    public void setHighlightedArInf(int color, String query) {
-
+    // return length of matching text
+    public int setHighlightedArInf(int color, String query) {
+        int matchLength = 0;
         if(highlighted_ar_inf == null || highlighted_translation == null) {
             stubHighlightedFields();
         }
@@ -66,12 +69,14 @@ class Article {
 
         while (m.find()) {
             highlighted_ar_inf.setSpan(new BackgroundColorSpan(color), m.start(), m.end(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            matchLength += (m.end() - m.start());
         }
-
+        return matchLength;
     }
 
-    public void setHighlightedTranslation(int color, String query) {
-
+    // return length of matching text
+    public int setHighlightedTranslation(int color, String query) {
+        int matchLength = 0;
         if(highlighted_ar_inf == null || highlighted_translation == null) {
             stubHighlightedFields();
         }
@@ -81,7 +86,9 @@ class Article {
 
         while (m.find()) {
             highlighted_translation.setSpan(new BackgroundColorSpan(color), m.start(), m.end(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            matchLength += (m.end() - m.start());
         }
+        return matchLength;
     }
 
     public String translationToHtml() {
@@ -142,4 +149,18 @@ class Article {
         return str.toString();
     }
 
+}
+
+// used only for sorting results
+class Root {
+    Integer matchScore;
+    ArrayList<Article> articles;
+    String root;
+}
+
+class RootMatchScoreComparator implements Comparator<Root> {
+    @Override
+    public int compare(Root lhs, Root rhs) {
+        return rhs.matchScore - lhs.matchScore;
+    }
 }
