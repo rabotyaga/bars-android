@@ -57,7 +57,7 @@
             android:layout_marginRight="5dp"
             android:layout_marginEnd="5dp"/>
 
-        <TextView
+        <ru.rabotyaga.baranov.CustomTextView
             android:id="@+id/txtTranscription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
