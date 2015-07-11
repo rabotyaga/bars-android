@@ -28,6 +28,13 @@ final class MyDatabase extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "articles.db";
     private static final int DATABASE_VERSION = 2;
 
+    // actually MyDatabase will fetch this from db
+    // in constructor
+    // this is only a fallback if cursor is failed somehow
+    // (this never should happen really, but better like that
+    // than Integer.MAX_VALUE or something like this)
+    private static final int LAST_ARTICLE_NR = 39288;
+
     private static final String ARTICLE_TABLE = "articles";
 
     private static final String COLUMN_NR = "nr";
@@ -68,13 +75,18 @@ final class MyDatabase extends SQLiteOpenHelper {
     };
 
     private static final String ORDER_BY = "nr";
+    private static final String ORDER_DESC = "nr DESC";
 
     private static final String SQL_LIKE = " LIKE ?";
     private static final String SQL_EQUAL = " = ?";
 
+    private static final String MAX_NR = "MAX(nr)";
+
     private static final String PRAGMA_USER_VERSION = "PRAGMA user_version";
 
     private static final String ASSET_DB_PATH = "databases/" + DATABASE_NAME;
+
+    public final int lastArticleNr;
 
     private final Context mContext;
 
@@ -126,6 +138,18 @@ final class MyDatabase extends SQLiteOpenHelper {
         if (mDatabase == null) {
             throw new MyDatabaseException("Failed to open database " + mDatabasePath);
         }
+
+        String[] columns = { MAX_NR };
+        Cursor c = mDatabase.query(ARTICLE_TABLE, columns, /*selection*/ null, /*args*/ null,
+                /*group by*/ null, /*having*/ null, null);
+
+        if (c.moveToNext()) {
+            lastArticleNr = c.getInt(c.getColumnIndex(MAX_NR));
+        } else {
+            lastArticleNr = LAST_ARTICLE_NR;
+        }
+
+        c.close();
     }
 
     public List<Article> getArticlesByQuery(String query, boolean exactSearch) {
@@ -265,6 +289,39 @@ final class MyDatabase extends SQLiteOpenHelper {
         return list;
     }
 
+    public String getPreviousRootByNr(int articleNr, String current_root) {
+        String previousRoot = null;
+
+        String selection = COLUMN_NR + " < ? AND " + COLUMN_ROOT + " != ?";
+        String[] sel_args = {String.format("%d", articleNr), current_root};
+        String[] columns = {COLUMN_ROOT};
+        Cursor c = mDatabase.query(ARTICLE_TABLE, columns, selection, sel_args,
+                /*group by*/ null, /*having*/ null, ORDER_DESC, "1");
+
+        if (c.moveToNext()) {
+            previousRoot = c.getString(c.getColumnIndex(COLUMN_ROOT));
+        }
+
+        c.close();
+        return previousRoot;
+    }
+
+    public String getNextRootByNr(int articleNr, String current_root) {
+        String nextRoot = null;
+
+        String selection = COLUMN_NR + " > ? AND " + COLUMN_ROOT + " != ?";
+        String[] sel_args = {String.format("%d", articleNr), current_root};
+        String[] columns = {COLUMN_ROOT};
+        Cursor c = mDatabase.query(ARTICLE_TABLE, columns, selection, sel_args,
+                /*group by*/ null, /*having*/ null, ORDER_BY, "1");
+
+        if (c.moveToNext()) {
+            nextRoot = c.getString(c.getColumnIndex(COLUMN_ROOT));
+        }
+
+        c.close();
+        return nextRoot;
+    }
 
     private String unescape(String str) {
         return str.replaceAll("\\\\n", "\\\n").replaceAll("\\\\r", "");

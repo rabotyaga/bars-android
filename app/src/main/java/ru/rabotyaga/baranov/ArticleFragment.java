@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,6 +42,8 @@ public class ArticleFragment extends Fragment implements LoaderManager.LoaderCal
     private TextView listHeader;
     private LinearLayout progressBar;
     private ArticleAdapter articleAdapter;
+    private ImageButton backButton;
+    private ImageButton forwardButton;
 
     private boolean scrollOnFinish = true;
 
@@ -74,8 +77,6 @@ public class ArticleFragment extends Fragment implements LoaderManager.LoaderCal
 
         mDualPane = getResources().getBoolean(R.bool.dual_pane);
 
-
-
         if (savedInstanceState != null) {
             // do not scroll to selected article
             // because it's not first launch
@@ -83,7 +84,6 @@ public class ArticleFragment extends Fragment implements LoaderManager.LoaderCal
             scrollOnFinish = false;
             Log.d(TAG, "savedInstanceState not null, removing scrollOnFinish!");
         }
-
     }
 
     @Override
@@ -118,6 +118,22 @@ public class ArticleFragment extends Fragment implements LoaderManager.LoaderCal
         }
 
         progressBar.setVisibility(View.VISIBLE);
+
+        backButton = (ImageButton) view.findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadPreviousRoot();
+            }
+        });
+
+        forwardButton = (ImageButton) view.findViewById(R.id.forwardButton);
+        forwardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadNextRoot();
+            }
+        });
 
         return view;
     }
@@ -169,6 +185,30 @@ public class ArticleFragment extends Fragment implements LoaderManager.LoaderCal
         }
     }
 
+    private void loadPreviousRoot() {
+        Log.d(TAG, "back");
+        Article firstArticle = articleAdapter.getArticle(0);
+        if (firstArticle != null) {
+            Bundle args = new Bundle();
+            args.putBoolean(ArticleLoader.ARG_LOAD_PREVIOUS_ROOT, true);
+            args.putString(ARG_ROOT, firstArticle.root);
+            args.putInt(ARG_ARTICLE_NR, firstArticle.nr);
+            getLoaderManager().restartLoader(0, args, this);
+        }
+    }
+
+    private void loadNextRoot() {
+        Log.d(TAG, "forward");
+        Article firstArticle = articleAdapter.getArticle(0);
+        if (firstArticle != null) {
+            Bundle args = new Bundle();
+            args.putBoolean(ArticleLoader.ARG_LOAD_NEXT_ROOT, true);
+            args.putString(ARG_ROOT, firstArticle.root);
+            args.putInt(ARG_ARTICLE_NR, firstArticle.nr);
+            getLoaderManager().restartLoader(0, args, this);
+        }
+    }
+
     private void setHeader() {
         if (listHeader == null) {
             return;
@@ -183,8 +223,16 @@ public class ArticleFragment extends Fragment implements LoaderManager.LoaderCal
         }
     }
 
+    private void updateHeader() {
+        if (mDualPane) {
+            setHeader();
+        } else {
+            ((DetailsActivity)getActivity()).updateHeader(mRoot);
+        }
+    }
+
     public Loader<List<Article>> onCreateLoader(int id, Bundle args) {
-        Log.d(TAG, String.format("onCreateLoader! args.%s = %d", ArticleLoader.ARG_ARTICLE_NR, (args!= null ? args.getInt(ArticleLoader.ARG_ARTICLE_NR):-1)));
+        Log.d(TAG, String.format("onCreateLoader! args.%s = %d", ArticleLoader.ARG_ARTICLE_NR, (args != null ? args.getInt(ArticleLoader.ARG_ARTICLE_NR) : -1)));
         if (progressBar != null) {
             progressBar.setVisibility(View.VISIBLE);
             progressBar.requestFocus();
@@ -193,6 +241,7 @@ public class ArticleFragment extends Fragment implements LoaderManager.LoaderCal
             listView.setVisibility(View.GONE);
             listView.scrollToPosition(0);
         }
+        articleAdapter.removeSelection();
         return new ArticleLoader(getActivity(), args, db);
     }
 
@@ -205,7 +254,34 @@ public class ArticleFragment extends Fragment implements LoaderManager.LoaderCal
 
             listView.setVisibility(View.VISIBLE);
             listView.requestFocus();
-            showNr();
+            if (((ArticleLoader) loader).isNavigatingRoots()) {
+                Log.d(TAG, "loader finished, navigating roots");
+                mRoot = articleAdapter.getRoot(0);
+                mArticleNr = articleAdapter.getFirstNr();
+                updateHeader();
+            } else {
+                Log.d(TAG, "loader finished, 'normal' mode");
+                showNr();
+            }
+            if (articleAdapter.getFirstNr() == 1) {
+                if (backButton != null) {
+                    backButton.setEnabled(false);
+                }
+            } else {
+                if (backButton != null && backButton.isEnabled() == false) {
+                    backButton.setEnabled(true);
+                }
+                if (articleAdapter.getLastNr() == db.lastArticleNr) {
+                    if (forwardButton != null) {
+                        forwardButton.setEnabled(false);
+                    }
+                } else {
+                    if (forwardButton != null && forwardButton.isEnabled() == false) {
+                        forwardButton.setEnabled(true);
+                    }
+                }
+            }
+
         }
         if (progressBar != null) {
             progressBar.setVisibility(View.GONE);
@@ -269,5 +345,4 @@ public class ArticleFragment extends Fragment implements LoaderManager.LoaderCal
         Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
         return true;
     }
-
 }

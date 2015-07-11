@@ -30,12 +30,7 @@ public class DetailsActivity extends AppCompatActivity {
         }
 
         if (args.containsKey(ArticleFragment.ARG_ROOT)) {
-            String title = getResources().getString(R.string.details_activity_title) + "  ";
-            title = title.concat(BidiFormatter.getInstance().unicodeWrap(args.getString(ArticleFragment.ARG_ROOT)));
-            ActionBar ab = getSupportActionBar();
-            if (ab != null) {
-                ab.setTitle(title);
-            }
+            updateHeader(args.getString(ArticleFragment.ARG_ROOT));
         }
     }
 
@@ -64,6 +59,15 @@ public class DetailsActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void updateHeader(String root) {
+        String title = getResources().getString(R.string.details_activity_title) + "  ";
+        title = title.concat(BidiFormatter.getInstance().unicodeWrap(root));
+        ActionBar ab = getSupportActionBar();
+        if (ab != null) {
+            ab.setTitle(title);
+        }
     }
 
 }

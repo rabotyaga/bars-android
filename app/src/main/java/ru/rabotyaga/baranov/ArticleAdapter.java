@@ -50,6 +50,20 @@ class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleViewHold
         return null;
     }
 
+    public int getFirstNr() {
+        if (!articleList.isEmpty()) {
+            return articleList.get(0).nr;
+        }
+        return -1;
+    }
+
+    public  int getLastNr() {
+        if (!articleList.isEmpty()) {
+            return articleList.get(articleList.size() - 1).nr;
+        }
+        return -1;
+    }
+
     public int findByNr(int nr) {
         for (int i = 0; i < articleList.size(); i++) {
             if (articleList.get(i).nr == nr) {
@@ -70,6 +84,10 @@ class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleViewHold
     public void setSelectedNHighlight(int position) {
         setSelected(position);
         notifyItemChanged(mSelected);
+    }
+
+    public void removeSelection() {
+        mSelected = -1;
     }
 
     @Override

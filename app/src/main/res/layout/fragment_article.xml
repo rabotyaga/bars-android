@@ -5,6 +5,65 @@
     tools:context="ru.rabotyaga.baranov.ArticleFragment"
     android:orientation="vertical" >
 
-    <include layout="@layout/list_layout" />
+    <LinearLayout
+        android:id="@+id/pbLL"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:focusableInTouchMode="true">
+
+        <ProgressBar
+            android:id="@+id/pbInProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+        </ProgressBar>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:background="@color/card_title_bkg"
+        android:layout_marginLeft="@dimen/root_margin"
+        android:layout_marginRight="@dimen/root_margin"
+        android:layout_marginTop="8dp"
+        />
+
+    <ru.rabotyaga.baranov.CustomRecyclerView
+        android:id="@+id/cardlist"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="vertical"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:gravity="center_horizontal" >
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            style="@style/AppCompat.Button.Flat"
+            android:src="@drawable/back_button" />
+
+        <ImageButton
+            android:id="@+id/forwardButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            style="@style/AppCompat.Button.Flat"
+            android:src="@drawable/forward_button" />
+
+    </LinearLayout>
 
 </LinearLayout>
