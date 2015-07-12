@@ -158,11 +158,12 @@ final class MyDatabase extends SQLiteOpenHelper {
         String sel_arg;
 
         if (query.matches("[\\p{InARABIC}]+")) {
-            selection = COLUMN_AR_INF_WO_VOWELS + SQL_LIKE;
             if (exactSearch) {
                 sel_arg = query;
+                selection = COLUMN_AR_INF_WO_VOWELS + SQL_EQUAL;
             } else {
                 sel_arg = "%" + query + "%";
+                selection = COLUMN_AR_INF_WO_VOWELS + SQL_LIKE;
             }
         } else {
             ru_search = true;
