@@ -94,7 +94,7 @@ class LetterAdapter extends RecyclerView.Adapter<LetterAdapter.LetterViewHolder>
             vInTheMiddle = (TextView) v.findViewById(R.id.txtInTheMiddle);
             vInTheEnd = (TextView) v.findViewById(R.id.txtInTheEnd);
             vNotes = (TextView) v.findViewById(R.id.txtNotes);
-            cardView = (CardView) v;
+            //cardView = (CardView) v;
         }
 
     }
