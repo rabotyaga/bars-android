@@ -87,7 +87,7 @@ class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleViewHold
     }
 
     public void removeSelection() {
-        mSelected = -1;
+        setSelected(-1);
     }
 
     @Override

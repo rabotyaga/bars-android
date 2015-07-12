@@ -551,6 +551,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mSelected = adapterPosition;
     }
 
+    public void removeSelection() {
+        setSelected(-1);
+    }
+
     private void showAlphabet() {
         Intent intent = new Intent();
         intent.setClass(this, AlphabetActivity.class);

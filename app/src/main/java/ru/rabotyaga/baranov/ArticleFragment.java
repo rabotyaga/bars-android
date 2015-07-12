@@ -259,6 +259,9 @@ public class ArticleFragment extends Fragment implements LoaderManager.LoaderCal
                 mRoot = articleAdapter.getRoot(0);
                 mArticleNr = articleAdapter.getFirstNr();
                 updateHeader();
+                if (mDualPane) {
+                    ((MainActivity) getActivity()).removeSelection();
+                }
             } else {
                 Log.d(TAG, "loader finished, 'normal' mode");
                 showNr();
