@@ -9,17 +9,12 @@ import android.support.v4.text.BidiFormatter;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
-
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 
 final class MyDatabase extends SQLiteOpenHelper {
 
@@ -327,7 +322,9 @@ final class MyDatabase extends SQLiteOpenHelper {
         return str.replaceAll("\\\\n", "\\\n").replaceAll("\\\\r", "");
     }
 
+    /*
     private String bidiWrap(String str) {
+
         String wrapped = "";
 
         BidiFormatter bidi = BidiFormatter.getInstance();
@@ -360,6 +357,7 @@ final class MyDatabase extends SQLiteOpenHelper {
 
         return wrapped;
     }
+    */
 
     private Article fillInArticleFromCursor(Cursor c, int arabicTextColor) {
         Article a = new Article();

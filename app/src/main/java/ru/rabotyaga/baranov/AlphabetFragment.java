@@ -18,8 +18,6 @@ public class AlphabetFragment extends Fragment  {
 
     private final List<Letter> letters = new ArrayList<>();
 
-    private RecyclerView lettersList;
-
     public AlphabetFragment() {
         // Required empty public constructor
     }
@@ -67,7 +65,7 @@ public class AlphabetFragment extends Fragment  {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_alphabet, container, false);
 
-        lettersList = (RecyclerView) v.findViewById(R.id.letters_list);
+        RecyclerView lettersList = (RecyclerView) v.findViewById(R.id.letters_list);
 
         lettersList.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());

@@ -271,7 +271,7 @@ public class ArticleFragment extends Fragment implements LoaderManager.LoaderCal
                     backButton.setEnabled(false);
                 }
             } else {
-                if (backButton != null && backButton.isEnabled() == false) {
+                if (backButton != null && !backButton.isEnabled()) {
                     backButton.setEnabled(true);
                 }
                 if (articleAdapter.getLastNr() == db.lastArticleNr) {
@@ -279,7 +279,7 @@ public class ArticleFragment extends Fragment implements LoaderManager.LoaderCal
                         forwardButton.setEnabled(false);
                     }
                 } else {
-                    if (forwardButton != null && forwardButton.isEnabled() == false) {
+                    if (forwardButton != null && !forwardButton.isEnabled()) {
                         forwardButton.setEnabled(true);
                     }
                 }

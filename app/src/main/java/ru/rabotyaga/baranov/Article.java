@@ -32,9 +32,9 @@ class Article {
     public final static String LABEL = "Словарная статья";
 
     private final static String ARABIC_VOWELS_REGEXP = "[\\u064b\\u064c\\u064d\\u064e\\u064f\\u0650\\u0651\\u0652\\u0653\\u0670]*";
-    public final static String ARABIC_REGEXP = "[\\p{InARABIC}]+((\\s*~)*(\\s*[\\p{InARABIC}]+)+)*";
+    private final static String ARABIC_REGEXP = "[\\p{InARABIC}]+((\\s*~)*(\\s*[\\p{InARABIC}]+)+)*";
 
-    public void stubHighlightedFields() {
+    private void stubHighlightedFields() {
         highlighted_ar_inf = Spannable.Factory.getInstance().newSpannable(this.ar_inf);
 
         highlighted_translation = Spannable.Factory.getInstance().newSpannable(this.translation);

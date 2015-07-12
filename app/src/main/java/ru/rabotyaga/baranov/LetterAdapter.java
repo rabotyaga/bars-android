@@ -82,7 +82,7 @@ class LetterAdapter extends RecyclerView.Adapter<LetterAdapter.LetterViewHolder>
         final TextView vInTheMiddle;
         final TextView vInTheEnd;
         final TextView vNotes;
-        final CardView cardView;
+        //final CardView cardView;
 
 
         public LetterViewHolder(View v) {

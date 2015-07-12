@@ -9,8 +9,6 @@ import android.widget.TextView;
 
 public class CustomTextView extends TextView {
 
-    Typeface customTypeface;
-
     public CustomTextView(Context context) {
         super(context);
         setCustomTypeface(context);
@@ -26,9 +24,9 @@ public class CustomTextView extends TextView {
         setCustomTypeface(context);
     }
 
-    public void setCustomTypeface(Context context) {
+    private void setCustomTypeface(Context context) {
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            customTypeface = FontCache.get("fonts/NotoSans-Italic.ttf", context);
+            Typeface customTypeface = FontCache.get("fonts/NotoSans-Italic.ttf", context);
             setTypeface(customTypeface);
         }
     }

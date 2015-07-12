@@ -21,7 +21,7 @@ class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleViewHold
         this.articleList = articleList;
     }
 
-    public ArticleAdapter(List<Article> articleList, boolean setOnClickListener) {
+    public ArticleAdapter(List<Article> articleList, @SuppressWarnings("SameParameterValue") boolean setOnClickListener) {
         this(articleList);
         this.mSetOnClickListener = setOnClickListener;
     }

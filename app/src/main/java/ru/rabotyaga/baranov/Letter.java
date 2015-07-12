@@ -12,7 +12,7 @@ class Letter {
         this(nr, nv, letter, notes, true, true);
     }
 
-    public Letter(int nr, int nv, char letter, String notes, boolean has_all_writings) {
+    public Letter(int nr, int nv, char letter, String notes, @SuppressWarnings("SameParameterValue") boolean has_all_writings) {
         this(nr, nv, letter, notes, has_all_writings, true);
     }
 

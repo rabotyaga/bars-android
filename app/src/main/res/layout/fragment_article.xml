@@ -54,7 +54,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             style="@style/AppCompat.Button.Flat"
-            android:src="@drawable/back_button" />
+            android:src="@drawable/back_button"
+            android:contentDescription="@string/backButton" />
 
         <ImageButton
             android:id="@+id/forwardButton"
@@ -62,7 +63,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             style="@style/AppCompat.Button.Flat"
-            android:src="@drawable/forward_button" />
+            android:src="@drawable/forward_button"
+            android:contentDescription="@string/forwardButton" />
 
     </LinearLayout>
 

@@ -63,6 +63,7 @@ public class AboutFragment extends Fragment {
         return v;
     }
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private boolean safeStartActivity(Intent intent) {
         try {
             startActivity(intent);
