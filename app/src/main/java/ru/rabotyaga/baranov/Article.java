@@ -105,6 +105,8 @@ class Article {
 
         str.append(bidi.unicodeWrap(ar_inf)).append(" ");
 
+        str.append(transcription);
+
         if (homonym_nr != null) {
             str.append(homonym_nr.toString()).append(" ");
         }
@@ -131,6 +133,8 @@ class Article {
         }
 
         str.append(bidi.unicodeWrap(ar_inf)).append(" ");
+
+        str.append(transcription);
 
         if (homonym_nr != null) {
             str.append(homonym_nr.toString()).append(" ");
