@@ -105,13 +105,13 @@ class Article {
 
         str.append(bidi.unicodeWrap(ar_inf)).append(" ");
 
-        str.append(transcription);
+        str.append(transcription).append(" ");
 
         if (homonym_nr != null) {
             str.append(homonym_nr.toString()).append(" ");
         }
 
-        if (!vocalization.isEmpty()) {
+        if (vocalization != null) {
             str.append(vocalization).append(" ");
         }
 
@@ -134,13 +134,13 @@ class Article {
 
         str.append(bidi.unicodeWrap(ar_inf)).append(" ");
 
-        str.append(transcription);
+        str.append(transcription).append(" ");
 
         if (homonym_nr != null) {
             str.append(homonym_nr.toString()).append(" ");
         }
 
-        if (!vocalization.isEmpty()) {
+        if (vocalization != null) {
             str.append(vocalization).append(" ");
         }
 
