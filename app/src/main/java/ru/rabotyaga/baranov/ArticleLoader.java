@@ -32,7 +32,12 @@ class ArticleLoader extends AsyncTaskLoader<List<Article>> {
         super(context);
 
         if (args != null) {
-            query = args.getString(ARG_QUERY);
+            String q = args.getString(ARG_QUERY);
+            if (q != null && !q.isEmpty()) {
+                query = Article.removeVowelsNHamza(q);
+            } else {
+                query = null;
+            }
             exactSearch = args.getBoolean(ARG_EXACT_SEARCH);
             articleNr = args.getInt(ARG_ARTICLE_NR, -1);
             articleRoot = args.getString(ARG_ROOT);
@@ -84,6 +89,7 @@ class ArticleLoader extends AsyncTaskLoader<List<Article>> {
                 } else {
                     if (query != null && !query.isEmpty()) {
                         Log.d(TAG, "loading search query");
+                        Log.d(TAG, String.format("q %s", query));
                         return db.getArticlesByQuery(query, exactSearch);
                     } else {
                         Log.d(TAG, "did not found any parameters, returning empty list");

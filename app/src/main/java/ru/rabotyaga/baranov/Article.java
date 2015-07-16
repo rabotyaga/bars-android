@@ -153,6 +153,14 @@ class Article {
         return str.toString();
     }
 
+    public static String removeVowelsNHamza(String str) {
+        String result = str.replaceAll(ARABIC_VOWELS_REGEXP, "");
+        result = result.replaceAll(ANY_ALIF_REGEXP, "\u0627");
+        result = result.replaceAll(ANY_WAW_REGEXP, "\u0648");
+        result = result.replaceAll(ANY_YEH_REGEXP, "\u0649");
+        return result;
+    }
+
 }
 
 // used only for sorting results
