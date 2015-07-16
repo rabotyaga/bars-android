@@ -16,6 +16,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.regex.Pattern;
 
 final class MyDatabase extends SQLiteOpenHelper {
 
@@ -156,6 +157,7 @@ final class MyDatabase extends SQLiteOpenHelper {
         boolean ru_search = false;
         String selection;
         String sel_arg;
+        Pattern query_regex;
 
         if (query.matches("[\\p{InARABIC}]+")) {
             if (exactSearch) {
@@ -165,6 +167,7 @@ final class MyDatabase extends SQLiteOpenHelper {
                 sel_arg = "%" + query + "%";
                 selection = COLUMN_AR_INF_WO_VOWELS + SQL_LIKE;
             }
+            query_regex = makeArabicRegex(query);
         } else {
             ru_search = true;
             selection = COLUMN_TRANSLATION + SQL_LIKE;
@@ -173,6 +176,7 @@ final class MyDatabase extends SQLiteOpenHelper {
             } else {
                 sel_arg = "%" + query + "%";
             }
+            query_regex = Pattern.compile(query);
         }
 
         String[] sel_args = {sel_arg};
@@ -190,14 +194,14 @@ final class MyDatabase extends SQLiteOpenHelper {
             Article a = fillInArticleFromCursor(c, arabicTextColor);
 
             if (ru_search) {
-                if (exactSearch) {
-                    current_article_match_score = a.setHighlightedTranslation(matchHighlightColor, " " + query + " ");
-                } else {
-                    current_article_match_score = a.setHighlightedTranslation(matchHighlightColor, query);
-                }
+                //if (exactSearch) {
+                    current_article_match_score = a.setHighlightedTranslation(matchHighlightColor, query_regex);
+                //} else {
+                //    current_article_match_score = a.setHighlightedTranslation(matchHighlightColor, query_regex);
+                //}
                 current_article_match_score = Math.round(current_article_match_score / (float) a.translation.length() * 100);
             } else {
-                current_article_match_score = a.setHighlightedArInf(matchHighlightColor, query);
+                current_article_match_score = a.setHighlightedArInf(matchHighlightColor, query_regex);
                 current_article_match_score = Math.round(current_article_match_score / (float) a.ar_inf.length() * 100);
             }
 
@@ -322,6 +326,21 @@ final class MyDatabase extends SQLiteOpenHelper {
 
     private String unescape(String str) {
         return str.replaceAll("\\\\n", "\\\n").replaceAll("\\\\r", "");
+    }
+
+    private Pattern makeArabicRegex(String query) {
+        String regex = "";
+
+        for(int i = 0; i < query.length(); i++) {
+            regex = regex + query.charAt(i) + Article.ARABIC_VOWELS_REGEXP;
+        }
+
+        regex = regex.replaceAll(Article.ANY_ALIF_REGEXP, Article.ANY_ALIF_REGEXP_LITERAL);
+        regex = regex.replaceAll(Article.ANY_WAW_REGEXP, Article.ANY_WAW_REGEXP_LITERAL);
+        regex = regex.replaceAll(Article.ANY_YEH_REGEXP, Article.ANY_YEH_REGEXP_LITERAL);
+
+        Pattern p = Pattern.compile(regex);
+        return p;
     }
 
     /*

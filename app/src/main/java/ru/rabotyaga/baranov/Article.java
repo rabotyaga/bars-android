@@ -31,8 +31,15 @@ class Article {
 
     public final static String LABEL = "Словарная статья";
 
-    private final static String ARABIC_VOWELS_REGEXP = "[\\u064b\\u064c\\u064d\\u064e\\u064f\\u0650\\u0651\\u0652\\u0653\\u0670]*";
+    public final static String ARABIC_VOWELS_REGEXP = "[\\u064b\\u064c\\u064d\\u064e\\u064f\\u0650\\u0651\\u0652\\u0653\\u0670]*";
     private final static String ARABIC_REGEXP = "[\\p{InARABIC}]+((\\s*~)*(\\s*[\\p{InARABIC}]+)+)*";
+
+    public final static String ANY_ALIF_REGEXP = "[\\u0622\\u0623\\u0625\\u0627]";
+    public final static String ANY_ALIF_REGEXP_LITERAL = "[\\\u0622\\\u0623\\\u0625\\\u0627]";
+    public final static String ANY_WAW_REGEXP = "[\\u0624\\u0648]";
+    public final static String ANY_WAW_REGEXP_LITERAL = "[\\\u0624\\\u0648]";
+    public final static String ANY_YEH_REGEXP = "[\\u0626\\u0649]";
+    public final static String ANY_YEH_REGEXP_LITERAL = "[\\\u0626\\\u0649]";
 
     private void stubHighlightedFields() {
         highlighted_ar_inf = Spannable.Factory.getInstance().newSpannable(this.ar_inf);
@@ -52,20 +59,13 @@ class Article {
     }
 
     // return length of matching text
-    public int setHighlightedArInf(int color, String query) {
+    public int setHighlightedArInf(int color, Pattern query_regex) {
         int matchLength = 0;
         if(highlighted_ar_inf == null || highlighted_translation == null) {
             stubHighlightedFields();
         }
-        //make regexp to skip vowels and match query, find start and end, highlight
-        String regex = "";
 
-        for(int i = 0; i < query.length(); i++) {
-            regex = regex + query.charAt(i) + ARABIC_VOWELS_REGEXP;
-        }
-
-        Pattern p = Pattern.compile(regex);
-        Matcher m = p.matcher(this.ar_inf);
+        Matcher m = query_regex.matcher(this.ar_inf);
 
         while (m.find()) {
             highlighted_ar_inf.setSpan(new BackgroundColorSpan(color), m.start(), m.end(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -75,14 +75,14 @@ class Article {
     }
 
     // return length of matching text
-    public int setHighlightedTranslation(int color, String query) {
+    public int setHighlightedTranslation(int color, Pattern query_regex) {
         int matchLength = 0;
         if(highlighted_ar_inf == null || highlighted_translation == null) {
             stubHighlightedFields();
         }
 
-        Pattern p = Pattern.compile(query);
-        Matcher m = p.matcher(this.translation);
+        //Pattern p = Pattern.compile(query);
+        Matcher m = query_regex.matcher(this.translation);
 
         while (m.find()) {
             highlighted_translation.setSpan(new BackgroundColorSpan(color), m.start(), m.end(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
