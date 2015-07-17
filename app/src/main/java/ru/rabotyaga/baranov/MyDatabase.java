@@ -339,8 +339,7 @@ final class MyDatabase extends SQLiteOpenHelper {
         regex = regex.replaceAll(Article.ANY_WAW_REGEXP, Article.ANY_WAW_REGEXP_LITERAL);
         regex = regex.replaceAll(Article.ANY_YEH_REGEXP, Article.ANY_YEH_REGEXP_LITERAL);
 
-        Pattern p = Pattern.compile(regex);
-        return p;
+        return Pattern.compile(regex);
     }
 
     /*
