@@ -32,7 +32,7 @@
         созданная Маратом Сайфутдиновым, исправленная и дополненная</string>
     <string name="description2">Программа является частью проекта по созданию современного,
         открытого и дополняемого словаря</string>
-    <string name="site_url">https://desolate-island-2917.herokuapp.com/about</string>
+    <string name="site_url">http://bars.org.ru/about</string>
     <string name="leave_a_comment">Оставить отзыв</string>
     <string name="go_to_site">Перейти на сайт</string>
     <string name="unable_to_open_market">Не удается открыть Google Play. Установите Google Play или бразуер.</string>
