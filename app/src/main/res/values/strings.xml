@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Словарь Баранова</string>
+    <string name="app_name">БАРС</string>
     <string name="action_settings">Настройки</string>
-    <string name="search_title">Искать в словаре Баранова</string>
+    <string name="search_title">Искать в БАРС</string>
     <string name="search_hint">Арабское или русское слово</string>
     <string name="rbSearchLikeText">Искать любое вхождение</string>
     <string name="rbSearchExactText">Искать только точное совпадение</string>
@@ -25,7 +25,7 @@
     <string name="copy_whole_article">Копировать всю карточку</string>
     <string name="translation_copied">Перевод скопирован в буфер обмена</string>
     <string name="whole_article_copied">Карточка скопирована в буфер обмена</string>
-    <string name="app_name_long">Арабско - русский словарь Баранова</string>
+    <string name="app_name_long">Большой арабско-русский словарь</string>
     <string name="version">Версия %s</string>
     <string name="copyright">© 2015 Иван Работяга</string>
     <string name="description">В программе используется цифровая копия словаря Х. К. Баранова,
