@@ -6,3 +6,4 @@
 /build
 /captures
 /app/app-release.apk
+/app/src/main/assets/databases/articles.db.gz
