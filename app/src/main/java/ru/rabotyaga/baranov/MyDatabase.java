@@ -76,6 +76,7 @@ final class MyDatabase extends SQLiteOpenHelper {
 
     private static final String SQL_LIKE = " LIKE ?";
     private static final String SQL_EQUAL = " = ?";
+    private static final String SQL_OR = " OR ";
 
     private static final String MAX_NR = "MAX(nr)";
 
@@ -156,15 +157,15 @@ final class MyDatabase extends SQLiteOpenHelper {
 
         boolean ru_search = false;
         String selection;
-        String sel_arg;
+        List<String> sel_args_list = new ArrayList<>();
         Pattern query_regex;
 
         if (query.matches("[\\p{InARABIC}]+")) {
             if (exactSearch) {
-                sel_arg = query;
+                sel_args_list.add(query);
                 selection = COLUMN_AR_INF_WO_VOWELS + SQL_EQUAL;
             } else {
-                sel_arg = "%" + query + "%";
+                sel_args_list.add("%" + query + "%");
                 selection = COLUMN_AR_INF_WO_VOWELS + SQL_LIKE;
             }
             query_regex = makeArabicRegex(query);
@@ -172,14 +173,30 @@ final class MyDatabase extends SQLiteOpenHelper {
             ru_search = true;
             selection = COLUMN_TRANSLATION + SQL_LIKE;
             if (exactSearch) {
-                sel_arg = "% " + query + " %";
+                selection = COLUMN_TRANSLATION + SQL_EQUAL + SQL_OR
+                        + COLUMN_TRANSLATION + SQL_LIKE + SQL_OR
+                        + COLUMN_TRANSLATION + SQL_LIKE + SQL_OR
+                        + COLUMN_TRANSLATION + SQL_LIKE + SQL_OR
+                        + COLUMN_TRANSLATION + SQL_LIKE + SQL_OR
+                        + COLUMN_TRANSLATION + SQL_LIKE + SQL_OR
+                        + COLUMN_TRANSLATION + SQL_LIKE + SQL_OR
+                        + COLUMN_TRANSLATION + SQL_LIKE;
+                sel_args_list.add(query);
+                sel_args_list.add(query + " %");
+                sel_args_list.add("% " + query);
+                sel_args_list.add("% " + query + ";%");
+                sel_args_list.add("% " + query + " %");
+                sel_args_list.add("% " + query + "!%");
+                sel_args_list.add("% " + query + ".%");
+                sel_args_list.add("% " + query + ",%");
             } else {
-                sel_arg = "%" + query + "%";
+                sel_args_list.add("%" + query + "%");
             }
             query_regex = Pattern.compile(query);
         }
 
-        String[] sel_args = {sel_arg};
+        String[] sel_args = {};
+        sel_args = sel_args_list.toArray(sel_args);
         Cursor c = mDatabase.query(ARTICLE_TABLE, ALL_COLUMNS, selection, sel_args,
                 /*group by*/ null, /*having*/ null, ORDER_BY);
 
