@@ -13,7 +13,7 @@
 * [Веб-версия](http://bars.org.ru)
 * [Версия для Android](https://play.google.com/store/apps/details?id=ru.rabotyaga.baranov)
 * [Версия для iOS](https://itunes.apple.com/ru/app/bol-soj-arabsko-russkij-slovar/id1021251680?mt=8) (iPhone/iPad/iPod touch)
-* База данных словаря в формате Apple Dictionary (выйдет в ближайшее время)
+* [База данных словаря в формате Apple Dictionary](http://bars.org.ru/apple_dictionary)
 
 Ключевые особенности:
 
