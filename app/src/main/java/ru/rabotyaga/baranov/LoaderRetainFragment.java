@@ -83,7 +83,7 @@ public class LoaderRetainFragment extends Fragment implements LoaderManager.Load
 
     void setQuery(String query, boolean exactSearch) {
         Log.d(TAG, String.format("called setQuery(str,bool) : (%s, %b)", query, exactSearch));
-        if (query == null || !query.equals(mQuery) || exactSearch != mExactSearch) {
+        if ((query == null || !query.equals(mQuery) || exactSearch != mExactSearch) && isAdded()) {
             mQuery = query;
             mExactSearch = exactSearch;
             Bundle args = new Bundle();
