@@ -71,6 +71,14 @@ class Article {
             highlighted_ar_inf.setSpan(new BackgroundColorSpan(color), m.start(), m.end(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             matchLength += (m.end() - m.start());
         }
+
+        Matcher mForOpts = query_regex.matcher(this.opts);
+
+        while (mForOpts.find()) {
+            optsSpannable.setSpan(new BackgroundColorSpan(color), mForOpts.start(), mForOpts.end(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            matchLength += (mForOpts.end() - mForOpts.start());
+        }
+
         return matchLength;
     }
 
