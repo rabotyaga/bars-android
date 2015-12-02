@@ -23,7 +23,7 @@ final class MyDatabase extends SQLiteOpenHelper {
     private static final String TAG = MyDatabase.class.getSimpleName();
 
     private static final String DATABASE_NAME = "articles.db";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     // actually MyDatabase will fetch this from db
     // in constructor
@@ -50,6 +50,7 @@ final class MyDatabase extends SQLiteOpenHelper {
     private static final String COLUMN_AR2 = "ar2";
     private static final String COLUMN_MN3 = "mn3";
     private static final String COLUMN_AR3 = "ar3";
+    private static final String COLUMN_AR123_WO_VOWELS_N_HAMZA = "ar123_wo_vowels_n_hamza";
 
     private static final String[] ALL_COLUMNS = {
             COLUMN_NR,
@@ -68,7 +69,7 @@ final class MyDatabase extends SQLiteOpenHelper {
             COLUMN_AR2,
             COLUMN_MN3,
             COLUMN_AR3,
-
+            COLUMN_AR123_WO_VOWELS_N_HAMZA,
     };
 
     private static final String ORDER_BY = "nr";
@@ -162,11 +163,21 @@ final class MyDatabase extends SQLiteOpenHelper {
 
         if (query.matches("[\\p{InARABIC}]+")) {
             if (exactSearch) {
+                selection = COLUMN_AR_INF_WO_VOWELS + SQL_EQUAL + SQL_OR
+                            + COLUMN_AR123_WO_VOWELS_N_HAMZA + SQL_EQUAL + SQL_OR
+                            + COLUMN_AR123_WO_VOWELS_N_HAMZA + SQL_LIKE + SQL_OR
+                            + COLUMN_AR123_WO_VOWELS_N_HAMZA + SQL_LIKE + SQL_OR
+                            + COLUMN_AR123_WO_VOWELS_N_HAMZA + SQL_LIKE;
                 sel_args_list.add(query);
-                selection = COLUMN_AR_INF_WO_VOWELS + SQL_EQUAL;
+                sel_args_list.add(query);
+                sel_args_list.add(query + " %");
+                sel_args_list.add("% " + query);
+                sel_args_list.add("% " + query + " %");
             } else {
+                selection = COLUMN_AR_INF_WO_VOWELS + SQL_LIKE + SQL_OR
+                            + COLUMN_AR123_WO_VOWELS_N_HAMZA + SQL_LIKE;
                 sel_args_list.add("%" + query + "%");
-                selection = COLUMN_AR_INF_WO_VOWELS + SQL_LIKE;
+                sel_args_list.add("%" + query + "%");
             }
             query_regex = makeArabicRegex(query);
         } else {
