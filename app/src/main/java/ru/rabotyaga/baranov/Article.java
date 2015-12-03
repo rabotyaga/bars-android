@@ -61,6 +61,7 @@ class Article {
     // return length of matching text
     public int setHighlightedArInf(int color, Pattern query_regex) {
         int matchLength = 0;
+        int matchScore = 0;
         if(highlighted_ar_inf == null || highlighted_translation == null) {
             stubHighlightedFields();
         }
@@ -72,6 +73,9 @@ class Article {
             matchLength += (m.end() - m.start());
         }
 
+        matchScore = Math.round(matchLength / (float) ar_inf.length() * 100);
+        matchLength = 0;
+
         Matcher mForOpts = query_regex.matcher(this.opts);
 
         while (mForOpts.find()) {
@@ -79,12 +83,15 @@ class Article {
             matchLength += (mForOpts.end() - mForOpts.start());
         }
 
-        return matchLength;
+        matchScore += Math.round(matchLength / (float) opts.length() * 100);
+
+        return matchScore;
     }
 
     // return length of matching text
     public int setHighlightedTranslation(int color, Pattern query_regex) {
         int matchLength = 0;
+        int matchScore = 0;
         if(highlighted_ar_inf == null || highlighted_translation == null) {
             stubHighlightedFields();
         }
@@ -96,7 +103,9 @@ class Article {
             highlighted_translation.setSpan(new BackgroundColorSpan(color), m.start(), m.end(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             matchLength += (m.end() - m.start());
         }
-        return matchLength;
+
+        matchScore = Math.round(matchLength / (float) translation.length() * 100);
+        return matchScore;
     }
 
     public String translationToHtml() {

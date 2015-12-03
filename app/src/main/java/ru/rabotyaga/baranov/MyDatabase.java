@@ -23,7 +23,7 @@ final class MyDatabase extends SQLiteOpenHelper {
     private static final String TAG = MyDatabase.class.getSimpleName();
 
     private static final String DATABASE_NAME = "articles.db";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
 
     // actually MyDatabase will fetch this from db
     // in constructor
@@ -227,10 +227,10 @@ final class MyDatabase extends SQLiteOpenHelper {
                 //} else {
                 //    current_article_match_score = a.setHighlightedTranslation(matchHighlightColor, query_regex);
                 //}
-                current_article_match_score = Math.round(current_article_match_score / (float) a.translation.length() * 100);
+                //current_article_match_score = Math.round(current_article_match_score / (float) a.translation.length() * 100);
             } else {
                 current_article_match_score = a.setHighlightedArInf(matchHighlightColor, query_regex);
-                current_article_match_score = Math.round(current_article_match_score / (float) a.ar_inf.length() * 100);
+                //current_article_match_score = Math.round(current_article_match_score / (float) a.ar_inf.length() * 100);
             }
 
             if (current_root.root != null && current_root.root.equals(a.root)) {
