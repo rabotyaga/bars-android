@@ -406,12 +406,14 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     public Loader<List<Article>> onCreateLoader(int id, Bundle args) {
         Log.d(TAG, "onCreateLoader! args.query = " + (args != null ? args.getString(ARG_QUERY) : "null"));
-        progressBar.setVisibility(View.VISIBLE);
-        listView.setVisibility(View.GONE);
-        listView.scrollToPosition(0);
-        optionsPane.setVisibility(View.GONE);
-        resultsCount.setVisibility(View.GONE);
-        progressBar.requestFocus();
+        if (progressBar != null && listView != null && optionsPane != null && resultsCount != null) {
+            progressBar.setVisibility(View.VISIBLE);
+            listView.setVisibility(View.GONE);
+            listView.scrollToPosition(0);
+            optionsPane.setVisibility(View.GONE);
+            resultsCount.setVisibility(View.GONE);
+            progressBar.requestFocus();
+        }
         setSelected(-1);
         mDetailsRoot = null;
         mDetailsNr = -1;
