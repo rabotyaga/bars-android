@@ -549,7 +549,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     private void setSelected(int adapterPosition) {
-        aa.setSelected(adapterPosition);
+        if (aa != null) {
+            aa.setSelected(adapterPosition);
+        }
         mSelected = adapterPosition;
     }
 
