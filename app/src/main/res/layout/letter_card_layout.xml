@@ -6,9 +6,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/letter_card_view"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:layout_margin="5dp"
     android:elevation="4dp"
+    android:layout_height="wrap_content"
     card_view:cardBackgroundColor="@color/card_background"
     tools:ignore="UnusedAttribute">
 
