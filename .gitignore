@@ -5,4 +5,5 @@
 /build
 /captures
 /app/app-release.apk
+/app/release/
 /app/src/main/assets/databases/articles.db.gz
