@@ -27,7 +27,7 @@
     <string name="whole_article_copied">Карточка скопирована в буфер обмена</string>
     <string name="app_name_long">Большой арабско-русский словарь</string>
     <string name="version">Версия %s</string>
-    <string name="copyright">© 2015–2018 Иван Работяга</string>
+    <string name="copyright">© 2015–2019 Иван Работяга</string>
     <string name="description">В программе используется цифровая копия словаря Х. К. Баранова,
         созданная Маратом Сайфутдиновым, исправленная и дополненная</string>
     <string name="description2">Программа является частью проекта по созданию современного,
