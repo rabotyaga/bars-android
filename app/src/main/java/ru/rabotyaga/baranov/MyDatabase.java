@@ -23,7 +23,7 @@ final class MyDatabase extends SQLiteOpenHelper {
     private static final String TAG = MyDatabase.class.getSimpleName();
 
     private static final String DATABASE_NAME = "articles.db";
-    private static final int DATABASE_VERSION = 11;
+    private static final int DATABASE_VERSION = 13;
 
     // actually MyDatabase will fetch this from db
     // in constructor
